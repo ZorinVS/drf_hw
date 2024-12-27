@@ -2,6 +2,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from lms.models import Course, Lesson
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -43,3 +45,34 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Payment(models.Model):
+    PAYMENT_CASH = 'cash'
+    PAYMENT_TRANSFER = 'transfer'
+
+    PAYMENT_CHOICES = [
+        (PAYMENT_CASH, 'Наличные'),
+        (PAYMENT_TRANSFER, 'Перевод на счет'),
+    ]
+
+    paid_course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name='payments', blank=True, null=True, verbose_name='оплаченный курс'
+    )
+    paid_lesson = models.ForeignKey(
+        Lesson, on_delete=models.CASCADE, related_name='payments', blank=True, null=True, verbose_name='оплаченный урок'
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='payments', verbose_name='пользователь')
+    payment_date = models.DateField(auto_now_add=True, verbose_name='дата оплаты')
+    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='сумма')
+    payment_method = models.CharField(
+        max_length=9, choices=PAYMENT_CHOICES, default=PAYMENT_TRANSFER, verbose_name='способ оплаты'
+    )
+
+    def __str__(self):
+        return f'Платеж {self.user} за {self.paid_course if self.paid_course else self.paid_lesson}'
+
+    class Meta:
+        verbose_name = 'платеж'
+        verbose_name_plural = 'платежи'
