@@ -1,0 +1,20 @@
+[
+{
+    "model": "lms.course",
+    "pk": 1,
+    "fields": {
+        "name": "Python для начинающих",
+        "preview": "",
+        "description": "Основы программирования на Python"
+    }
+},
+{
+    "model": "lms.course",
+    "pk": 2,
+    "fields": {
+        "name": "Веб-разработка с Django",
+        "preview": "",
+        "description": "Создание веб-приложений с использованием Django"
+    }
+}
+]
