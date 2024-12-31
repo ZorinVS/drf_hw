@@ -12,7 +12,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'avatar', 'phone_number', 'city']
+        fields = ('id', 'email', 'password', 'avatar', 'phone_number', 'city')
 
     def create(self, validated_data):
         password = validated_data.pop("password")
@@ -22,15 +22,15 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserDetailSerializer(serializers.ModelSerializer):
-    payments = PaymentSerializer(many=True)
+class UserSerializer(serializers.ModelSerializer):
+    payments = PaymentSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('email', 'avatar', 'phone_number', 'city', 'payments')
+        fields = ('id', 'email', 'avatar', 'phone_number', 'city', 'payments')
 
 
-class UserUpdateSerializer(serializers.ModelSerializer):
+class GuestUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['avatar', 'phone_number', 'city']
+        fields = ('id', 'email', 'avatar', 'phone_number', 'city')

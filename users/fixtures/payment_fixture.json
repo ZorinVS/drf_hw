@@ -5,7 +5,7 @@
     "fields": {
         "paid_course": 1,
         "paid_lesson": null,
-        "user": 2,
+        "user": 5,
         "payment_date": "2024-12-25",
         "amount": "30000.00",
         "payment_method": "cash"
@@ -17,7 +17,7 @@
     "fields": {
         "paid_course": null,
         "paid_lesson": 2,
-        "user": 3,
+        "user": 6,
         "payment_date": "2024-12-26",
         "amount": "1500.00",
         "payment_method": "transfer"
@@ -29,7 +29,7 @@
     "fields": {
         "paid_course": 2,
         "paid_lesson": null,
-        "user": 2,
+        "user": 5,
         "payment_date": "2024-12-27",
         "amount": "15000.00",
         "payment_method": "transfer"
@@ -41,7 +41,7 @@
     "fields": {
         "paid_course": 1,
         "paid_lesson": null,
-        "user": 3,
+        "user": 6,
         "payment_date": "2024-12-24",
         "amount": "30000.00",
         "payment_method": "transfer"
