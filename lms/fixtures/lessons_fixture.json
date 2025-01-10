@@ -7,6 +7,7 @@
         "preview": "",
         "description": "Урок об основах Python",
         "link": "https://example.com/python-intro",
+        "owner": 2,
         "course": [
             1
         ]
@@ -20,6 +21,7 @@
         "preview": "",
         "description": "Урок о моделях Django",
         "link": "https://example.com/django-models",
+        "owner": 3,
         "course": [
             2
         ]
@@ -33,6 +35,7 @@
         "preview": "",
         "description": "Урок о создании REST API",
         "link": "https://example.com/django-rest",
+        "owner": 3,
         "course": [
             2
         ]
