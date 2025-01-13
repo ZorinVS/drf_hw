@@ -125,7 +125,7 @@ class LessonTestCase(APITestCase):
                 )
             )
 
-        # === 3. Тест новым пользователем, который еще ничего не купил и не создал
+        # === 3. Тест новым пользователем, который еще ничего не купил и не создал ===
         self.client.force_authenticate(user=self.new_user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -163,7 +163,7 @@ class LessonTestCase(APITestCase):
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(result, expected)
 
-        # === 3. Тест новым пользователем, который еще ничего не купил и не создал
+        # === 3. Тест новым пользователем, который еще ничего не купил и не создал ===
         self.client.force_authenticate(user=self.new_user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -188,7 +188,7 @@ class LessonTestCase(APITestCase):
                 second=new_data['name'],
             )
 
-        # === 3. Тест новым пользователем, который еще ничего не купил и не создал
+        # === 3. Тест новым пользователем, который еще ничего не купил и не создал ===
         self.client.force_authenticate(user=self.new_user)
         response = self.client.patch(url, data=new_data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -231,8 +231,8 @@ class SubscriptionTestCase(APITestCase):
         self.subscription_url = reverse('lms:subscription')
 
         self.data_for_api = (
-            {'user': self.user.pk, 'course': self.unsubscribed_course.pk},
-            {'user': self.user.pk, 'course': self.subscribed_course.pk},
+            {'course': self.unsubscribed_course.pk},
+            {'course': self.subscribed_course.pk},
         )
 
     def get_course_details(self, pk):
@@ -252,7 +252,7 @@ class SubscriptionTestCase(APITestCase):
         # Получение pk курса, на который пользователь еще не подписан
         pk = self.unsubscribed_course.pk
 
-        # === 1. Тест неавторизованным пользователем
+        # === 1. Тест неавторизованным пользователем ===
         response = self.client.post(self.subscription_url, data=self.data_for_api[0])
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -273,7 +273,7 @@ class SubscriptionTestCase(APITestCase):
         # Получение pk курса, на который пользователь уже подписан
         pk = self.subscribed_course.pk
 
-        # === 1. Тест неавторизованным пользователем
+        # === 1. Тест неавторизованным пользователем ===
         response = self.client.post(self.subscription_url, data=self.data_for_api[1])
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
