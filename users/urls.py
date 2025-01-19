@@ -22,4 +22,5 @@ urlpatterns = [
     # Payment
     path('payments/create/', views.PaymentCreateAPIView.as_view(), name='payments-create'),
     path('payments/', views.PaymentListAPIView.as_view(), name='payments-list'),
+    path('payments/status/<str:session_id>/', views.PaymentStatusAPIView.as_view(), name='payment-status'),
 ]

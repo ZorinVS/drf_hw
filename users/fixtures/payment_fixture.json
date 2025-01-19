@@ -8,7 +8,10 @@
         "user": 5,
         "payment_date": "2024-12-25",
         "amount": "30000.00",
-        "payment_method": "cash"
+        "payment_method": "cash",
+        "session_id": "cs_test_a1gKL03oB0c7NPgyPpVHgFd6ttReGCWsPVvrXV7KIG5N2MnKxh8EX12TSD",
+        "link": "https://checkout.stripe.com/c/pay/cs_test_a1gKL03oB0c7NPgyPpVHgFd6ttReGCWsPVvrXV7KIG5N2MnKxh8EX12TSD#fidkdWxOYHwnPyd1blpxYHZxWjA0VG12TVRPUDAzRklQVXRzQF9kVn1IcnZqUXFDME9DT31if1d%2FNVRiSn98a19rTGNHSGdBcUNTPXRjUHM1Y05LSmNmbDd9MGJkMnZhYl0wXDZgN19OVmNVNTVddGM3VWgzXCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+        "status": "unpaid"
     }
 },
 {
@@ -20,7 +23,10 @@
         "user": 6,
         "payment_date": "2024-12-26",
         "amount": "1500.00",
-        "payment_method": "transfer"
+        "payment_method": "transfer",
+        "session_id": "cs_test_a1JyaCqnATXpuWzBodjbvWvTD9DJPxelkO8J2KwmltglFpOoy2xb7gv6wA",
+        "link": "https://checkout.stripe.com/c/pay/cs_test_a1JyaCqnATXpuWzBodjbvWvTD9DJPxelkO8J2KwmltglFpOoy2xb7gv6wA#fidkdWxOYHwnPyd1blpxYHZxWjA0VG12TVRPUDAzRklQVXRzQF9kVn1IcnZqUXFDME9DT31if1d%2FNVRiSn98a19rTGNHSGdBcUNTPXRjUHM1Y05LSmNmbDd9MGJkMnZhYl0wXDZgN19OVmNVNTVddGM3VWgzXCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+        "status": "unpaid"
     }
 },
 {
@@ -32,7 +38,10 @@
         "user": 5,
         "payment_date": "2024-12-27",
         "amount": "15000.00",
-        "payment_method": "transfer"
+        "payment_method": "transfer",
+        "session_id": "cs_test_a14OqZPCY0aKorzZdKOssfLAoWDh0Lbye0g4SNVHtsRzmTlXRuU0Jz38De",
+        "link": "https://checkout.stripe.com/c/pay/cs_test_a14OqZPCY0aKorzZdKOssfLAoWDh0Lbye0g4SNVHtsRzmTlXRuU0Jz38De#fidkdWxOYHwnPyd1blpxYHZxWjA0VG12TVRPUDAzRklQVXRzQF9kVn1IcnZqUXFDME9DT31if1d%2FNVRiSn98a19rTGNHSGdBcUNTPXRjUHM1Y05LSmNmbDd9MGJkMnZhYl0wXDZgN19OVmNVNTVddGM3VWgzXCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+        "status": "unpaid"
     }
 },
 {
@@ -44,7 +53,10 @@
         "user": 6,
         "payment_date": "2024-12-24",
         "amount": "30000.00",
-        "payment_method": "transfer"
+        "payment_method": "transfer",
+        "session_id": "cs_test_a1o8yowuKBZsYPtEHaI6WnvX2ofPiJnH4sSzFUtshjFJ12Wb7uTrEiEQoh",
+        "link": "https://checkout.stripe.com/c/pay/cs_test_a1o8yowuKBZsYPtEHaI6WnvX2ofPiJnH4sSzFUtshjFJ12Wb7uTrEiEQoh#fidkdWxOYHwnPyd1blpxYHZxWjA0VG12TVRPUDAzRklQVXRzQF9kVn1IcnZqUXFDME9DT31if1d%2FNVRiSn98a19rTGNHSGdBcUNTPXRjUHM1Y05LSmNmbDd9MGJkMnZhYl0wXDZgN19OVmNVNTVddGM3VWgzXCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+        "status": "unpaid"
     }
 }
 ]
