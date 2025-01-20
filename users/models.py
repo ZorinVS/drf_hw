@@ -56,6 +56,14 @@ class Payment(models.Model):
         (PAYMENT_TRANSFER, 'Перевод на счет'),
     ]
 
+    STATUS_UNPAID = 'unpaid'
+    STATUS_PAID = 'paid'
+
+    STATUS_CHOICES = [
+        (STATUS_UNPAID, 'не оплачено'),
+        (STATUS_PAID, 'оплачено'),
+    ]
+
     paid_course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='payments', blank=True, null=True, verbose_name='оплаченный курс'
     )
@@ -68,6 +76,11 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='сумма')
     payment_method = models.CharField(
         max_length=9, choices=PAYMENT_CHOICES, default=PAYMENT_TRANSFER, verbose_name='способ оплаты'
+    )
+    session_id = models.CharField(max_length=255, blank=True, null=True, verbose_name='ID сессии')
+    link = models.URLField(max_length=400, blank=True, null=True, verbose_name='ссылка на оплату')
+    status = models.CharField(
+        max_length=6, choices=STATUS_CHOICES, default=STATUS_UNPAID, verbose_name='статус платежа'
     )
 
     def __str__(self):
