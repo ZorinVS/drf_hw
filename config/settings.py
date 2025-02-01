@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
 
+    'django_celery_beat',
     'django_filters',
     'rest_framework_simplejwt',
     'rest_framework',
@@ -174,3 +175,27 @@ SWAGGER_SETTINGS = {
 }
 
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
+
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_TASK_TIME_LIMIT = 5 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.disable_inactive_users',
+        'schedule': timedelta(days=1),  # раз в день
+    },
+}
+
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL').lower() == 'true'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
