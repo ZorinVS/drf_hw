@@ -9,6 +9,7 @@ from lms import services
 from lms.models import Course, Lesson, Subscription
 from lms.paginators import PageNumberPagination
 from lms.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
+from lms.tasks import send_update_notifications
 from users.permissions import IsModeratorUser, IsOwnerUser, IsStudentUser
 
 
@@ -18,6 +19,18 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        last_update = self.get_object().updated_at
+        course = serializer.save()
+
+        is_subscribed = course.subscriptions.exists()
+        if is_subscribed and services.has_time_passed_since_update(last_update):
+            send_update_notifications.delay(updated_course_id=course.pk)
+
+        else:
+            reason = 'Прошло меньше 4 часов с последнего обновления' if is_subscribed else 'Нет подписчиков на курс'
+            print(f'Уведомления не были разосланы! Причина: {reason}')
 
     def get_permissions(self):
         if self.action == 'create':

@@ -7,6 +7,8 @@ class Course(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='название курса')
     preview = models.ImageField(upload_to='lms/courses/previews/', verbose_name='превью', blank=True, null=True)
     description = models.TextField(verbose_name='описание')
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='дата загрузки курса')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='дата обновления')
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='courses', verbose_name='владелец'
     )

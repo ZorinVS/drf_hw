@@ -1,4 +1,7 @@
+from datetime import timedelta
+
 from django.db import models as db_models
+from django.utils import timezone
 
 from lms.models import Course, Lesson
 
@@ -19,3 +22,10 @@ def get_product_queryset(user, model):
     return model.objects.filter(
         db_models.Q(owner=user) | db_models.Q(payments__user=user)
     ).distinct()
+
+
+def has_time_passed_since_update(last_update, time_limit=4):
+    """ Проверка, прошло ли указанное время с момента обновления """
+
+    delta = timedelta(hours=time_limit)
+    return timezone.now() - last_update > delta

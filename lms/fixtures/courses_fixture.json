@@ -6,6 +6,8 @@
         "name": "Python для начинающих",
         "preview": "",
         "description": "Основы программирования на Python",
+        "uploaded_at": "2025-01-10T10:51:22.400Z",
+        "updated_at": "2025-01-31T20:51:22.400Z",
         "owner": 2
     }
 },
@@ -16,6 +18,8 @@
         "name": "Веб-разработка с Django",
         "preview": "",
         "description": "Создание веб-приложений с использованием Django",
+        "uploaded_at": "2025-01-11T10:51:22.400Z",
+        "updated_at": "2025-01-31T20:51:22.400Z",
         "owner": 3
     }
 }

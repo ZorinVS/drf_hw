@@ -10,6 +10,7 @@ FIXTURE_PATHS = (
     'lms/fixtures/courses_fixture.json',
     'lms/fixtures/lessons_fixture.json',
     'users/fixtures/payment_fixture.json',
+    'lms/fixtures/subscriptions_fixture.json',
 )
 
 AUTH_DETAILS = ("""
@@ -28,6 +29,9 @@ AUTH_DETAILS = ("""
     - student2@example.com
   Новый пользователь (без курсов/уроков):
     - new_user@example.com
+  Неактивные пользователи:
+    - inactive_user030624@example.com
+    - inactive_user090924@example.com
   Пароль для пользователей: password123
 """)
 
