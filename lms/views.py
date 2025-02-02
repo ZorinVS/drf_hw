@@ -26,7 +26,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
         is_subscribed = course.subscriptions.exists()
         if is_subscribed and services.has_time_passed_since_update(last_update):
-            send_update_notifications(updated_course=course)
+            send_update_notifications.delay(updated_course_id=course.pk)
 
         else:
             reason = 'Прошло меньше 4 часов с последнего обновления' if is_subscribed else 'Нет подписчиков на курс'
