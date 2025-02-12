@@ -4,13 +4,6 @@
 
 Платформа для онлайн-обучения, на которой каждый желающий может размещать свои полезные материалы или курсы.
 
-### Выполнено
-
-- Настроен проект для работы с Celery
-- Реализована асинхронная рассылка писем пользователям
-- Добавлена проверка на отправку уведомлений
-- Реализована фоновая задача для блокировки неактивных пользователей
-
 ## Зависимости
 
 - celery 5.4.0
@@ -34,54 +27,67 @@
    ```shell
    git clone git@github.com:ZorinVS/drf_hw.git
    ```
-2. Установите зависимости:
-   ```shell
-   pip3 install -r requirements.txt
-   ```
-
-## Подключение БД
-1. Создайте БД
 2. Создайте файл `.env` из файла `.env.sample`
+3. Соберите и запустите контейнеры:
+   
+   Команда собирает и запускает контейнеры, применяет миграции и запускает проект:
+   ```shell
+   docker-compose up -d --build
+   ```
 
-## Применение миграций
+## Повторный запуск проекта
+
 ```shell
-python manage.py migrate
+docker-compose up -d
 ```
 
-## Создание суперпользователя
-- С помощью менеджера:
-   ```shell
-   python3 manage.py createsuperuser
-   ```
+## Проверка работоспособности каждого сервиса
 
-## Запуск
-1. Запустите сервер Django:
-   ```shell
-   python3 manage.py runserver
-   ```
-2. Запустите брокер Redis:
-   ```shell
-   redis-server
-   ```
-3. Запустите Celery worker с планировщиком Celery beat:
-   ```shell
-   celery -A config worker --beat --scheduler django --loglevel=info
-   ```
+### Приложение LMS REST-API (Django)
 
-## Наполнение данными
+После запуска проекта, приложение будет доступно по адресу http://localhost:8000. 
+Чтобы проверить, что сервис работает правильно, откройте этот URL в браузере.
+
+### База данных (PostgreSQL)
+
+Чтобы проверить, что PostgreSQL работает, выполните:
+
 ```shell
-python3 manage.py fill_lms
+docker-compose exec db pg_isready -U "$(echo $POSTGRES_USER)"
 ```
+
+### Redis
+
+Чтобы проверить работу Redis, выполните команду:
+```shell
+docker-compose exec redis redis-cli ping
+```
+
+### Celery
+
+Для проверки работы Celery, выполните:
+
+```shell
+docker-compose exec celery celery -A config status
+```
+
+### Celery Beat
+
+Для проверки работы Celery Beat, выполните:
+```shell
+docker-compose logs celery_beat
+```
+
 ## Отчета о покрытии кода тестами
 
 ### Шаг 1: Сбор данных о покрытии
 Запуск тестов с измерением покрытия кода:
 ```shell
-coverage run --source='.' manage.py test
+docker-compose exec app coverage run --source='.' manage.py test
 ```
 
 ### Шаг 2: Генерация текстового отчёта
 Создание текстового отчёта:
 ```shell
-coverage report
+docker-compose exec app coverage report
 ```
