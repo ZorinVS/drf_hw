@@ -7,26 +7,8 @@ services:
       - .env
     environment:
       CELERY_BROKER_URL: redis://redis:6379/0
-      PGPASSWORD: ${POSTGRES_PASSWORD}
     command: >
-      bash -c "
-        echo 'Waiting for PostgreSQL to start...';
-        while ! PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h db -d postgres -c 'SELECT 1' > /dev/null 2>&1; do
-          sleep 1;
-        done &&
-        echo 'PostgreSQL is ready. Checking if database exists...';
-        if ! PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h db -lqt | cut -d \\| -f 1 | grep -qw $POSTGRES_NAME; then
-          echo 'Creating database $POSTGRES_NAME...';
-          PGPASSWORD=$POSTGRES_PASSWORD createdb -U $POSTGRES_USER -h db $POSTGRES_NAME;
-          echo 'Database $POSTGRES_NAME created.';
-        else
-          echo 'Database $POSTGRES_NAME already exists.';
-        fi &&
-        echo 'Applying migrations...';
-        python manage.py migrate &&
-        echo 'Starting Django server...';
-        python manage.py runserver 0.0.0.0:8000
-      "
+      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       db:
         condition: service_healthy
@@ -40,11 +22,11 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_NAME: drf_hw
+      POSTGRES_DB: drf_hw
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -68,14 +50,21 @@ services:
     command: celery -A config worker -l INFO
     depends_on:
       - redis
+      - db
+    healthcheck:
+      test: [ "CMD-SHELL", "celery -A config status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   celery_beat:
     build: .
     env_file:
       - .env
-    command: celery -A config beat -l info -S django
+    command: >
+      bash -c "celery -A config beat -l info -S django"
     depends_on:
-      - celery
-      - app
+      celery:
+        condition: service_healthy
 volumes:
   postgres_data:
   static_volume:
