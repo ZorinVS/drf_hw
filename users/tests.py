@@ -100,7 +100,6 @@ class PaymentTestCase(APITestCase):
         response = self.client.get(retrieve_url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-
     @staticmethod
     def convert_amount_in_response(response):
         """ Преобразование значения amount в ответе к типу Float """
