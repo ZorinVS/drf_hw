@@ -106,5 +106,4 @@ jobs:
           sudo docker run -d --name drf_hw_app -p 80:8000 --env-file /var/www/drf_hw/.env ${{ secrets.DOCKER_HUB_USERNAME }}/drf_hw_app:${{ github.sha }}
           sudo docker exec drf_hw_app python manage.py migrate
           sudo docker exec drf_hw_app python manage.py collectstatic --noinput
-          sudo docker exec -d drf_hw_app python manage.py runserver 0.0.0.0:8000
           EOF
