@@ -103,5 +103,5 @@ jobs:
           sudo docker stop $(sudo docker ps -q) || true
           sudo docker rm $(sudo docker ps -a -q) || true
           sudo docker rmi $(sudo docker images -q) || true
-          sudo docker run -d --name drf_hw_app_1 -p 8000:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/drf_hw_app:${{ github.sha }}
+          sudo docker run -d --name drf_hw_app -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/drf_hw_app:${{ github.sha }}
           EOF
